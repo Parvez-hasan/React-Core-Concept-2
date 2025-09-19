@@ -4,6 +4,8 @@ import Actor from './Actor';
 import Singer from './Singer';
 import Library from './Library';
 import Counter from './components/counter';
+import Batsman from './components/Batsman';
+import Users from './components/Users';
 
 function App() {
   function headleClick(){
@@ -40,6 +42,8 @@ function App() {
        
       </div>
       <h3>Vite + React</h3>
+      <Users></Users>
+      <Batsman></Batsman>
       <Counter></Counter>
 
       <button onClick={headleClick}>Click Me</button>
@@ -51,11 +55,8 @@ function App() {
 
     {/* <Library books={books}></Library> */}
 
-      
-        {/* actors.map(actor => <Actor  actor={actor}></Actor>) */}
-
-    
-      {
+    {/* actors.map(actor => <Actor  actor={actor}></Actor>) */}
+     {
         // singers.map(singer => <Singer key={singer.id} singer={singer} ></Singer> )
      }
       
