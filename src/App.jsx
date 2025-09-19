@@ -6,9 +6,29 @@ import Library from './Library';
 import Counter from './components/counter';
 import Batsman from './components/Batsman';
 import Users from './components/Users';
+import { Suspense } from 'react';
+import Friends from './components/Friends';
+
+
+
+  const fetchUsers = fetch("https://jsonplaceholder.typicode.com/users")
+    .then((res) => res.json())
+
+
+
+  const fetchFriends = async () => {
+    const res = await fetch("https://jsonplaceholder.typicode.com/users");
+    return res.json();
+  }
+
 
 function App() {
-  function headleClick(){
+
+ const friendsPromise = fetchFriends();
+
+
+
+  function headleClick() {
     alert('i am clicked')
   }
   const hrandleClick3 = () => {
@@ -16,33 +36,43 @@ function App() {
   }
 
   const headleAdd = (num) => {
-   const newNum = num + 10;
-   alert(newNum)
+    const newNum = num + 10;
+    alert(newNum)
   }
 
   // const actors = ['parvez', 'hasan','salman',"rajjak", 'noyon', 'shakib', 'deav'];
-// const singers = [
-// { id: 1, name: 'Dr. mustak', age: 50},
-// { id: 2, name: 'Dr. mustakim', age: 80},
-// { id: 3, name: 'Mr. mustakimu', age: 30},
+  // const singers = [
+  // { id: 1, name: 'Dr. mustak', age: 50},
+  // { id: 2, name: 'Dr. mustakim', age: 80},
+  // { id: 3, name: 'Mr. mustakimu', age: 30},
 
-// ];
-// const books = [
-//   {id: 1, name: 'physics', price: 250},
-//   {id: 2, name: 'bangla', price: 260},
-//   {id: 3, name: 'math', price: 280},
-//   {id: 4, name: 'english', price: 350},
-//   {id: 5, name: 'ICT', price: 200},
-// ]
+  // ];
+  // const books = [
+  //   {id: 1, name: 'physics', price: 250},
+  //   {id: 2, name: 'bangla', price: 260},
+  //   {id: 3, name: 'math', price: 280},
+  //   {id: 4, name: 'english', price: 350},
+  //   {id: 5, name: 'ICT', price: 200},
+  // ]
 
 
   return (
     <>
       <div>
-       
+
       </div>
       <h3>Vite + React</h3>
-      <Users></Users>
+
+      <Suspense fallback={<h3>Loading...</h3>}>
+        <Users fetchUsers={fetchUsers}></Users>
+      </Suspense>
+
+      <Suspense fallback={<h3>hello my all friend....</h3>}>
+        <Friends friendsPromise ={friendsPromise}></Friends>
+      </Suspense>
+
+
+
       <Batsman></Batsman>
       <Counter></Counter>
 
@@ -51,15 +81,15 @@ function App() {
       <button onClick={hrandleClick3} >Click me 3</button>
       <button onClick={() => alert('a cilck 4')} >Click me 4</button>
 
-      <button onClick={ () => headleAdd(8)} >Cilck add</button>
+      <button onClick={() => headleAdd(8)} >Cilck add</button>
 
-    {/* <Library books={books}></Library> */}
+      {/* <Library books={books}></Library> */}
 
-    {/* actors.map(actor => <Actor  actor={actor}></Actor>) */}
-     {
+      {/* actors.map(actor => <Actor  actor={actor}></Actor>) */}
+      {
         // singers.map(singer => <Singer key={singer.id} singer={singer} ></Singer> )
-     }
-      
+      }
+
     </>
   )
 }
