@@ -8,23 +8,38 @@ import Batsman from './components/Batsman';
 import Users from './components/Users';
 import { Suspense } from 'react';
 import Friends from './components/Friends';
+import Posts from './components/Posts';
+import Photos from './components/Photos';
+
+
+const fetchPhotos = async () => {
+ const res = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?f=a');
+ return res.json();
+}
+
+// const fetchPosts = async () => {
+//   const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+//    return res.json();
+// };
+
+  // const fetchUsers = fetch("https://jsonplaceholder.typicode.com/users")
+  //   .then((res) => res.json())
 
 
 
-  const fetchUsers = fetch("https://jsonplaceholder.typicode.com/users")
-    .then((res) => res.json())
-
-
-
-  const fetchFriends = async () => {
-    const res = await fetch("https://jsonplaceholder.typicode.com/users");
-    return res.json();
-  }
+  // const fetchFriends = async () => {
+  //   const res = await fetch("https://jsonplaceholder.typicode.com/users");
+  //   return res.json();
+  // }
 
 
 function App() {
 
- const friendsPromise = fetchFriends();
+const photoPromise = fetchPhotos();
+//console.log(photoPromise);
+
+//  const friendsPromise = fetchFriends();
+ // const postPromise = fetchPosts();
 
 
 
@@ -58,18 +73,24 @@ function App() {
 
   return (
     <>
-      <div>
-
-      </div>
+      
       <h3>Vite + React</h3>
 
-      <Suspense fallback={<h3>Loading...</h3>}>
-        <Users fetchUsers={fetchUsers}></Users>
+      <Suspense fallback={<h4> photos comeing soon....</h4>}>
+        <Photos photoPromise={photoPromise} ></Photos>
       </Suspense>
 
-      <Suspense fallback={<h3>hello my all friend....</h3>}>
+      {/* <Suspense fallback={<h4>post are comeing......</h4>}>
+             <Posts postPromise={postPromise}></Posts>
+      </Suspense> */}
+
+      {/* <Suspense fallback={<h3>Loading...</h3>}>
+        <Users fetchUsers={fetchUsers}></Users>
+      </Suspense> */}
+
+      {/* <Suspense fallback={<h3>hello my all friend....</h3>}>
         <Friends friendsPromise ={friendsPromise}></Friends>
-      </Suspense>
+      </Suspense> */}
 
 
 
